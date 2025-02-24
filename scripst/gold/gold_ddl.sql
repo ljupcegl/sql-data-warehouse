@@ -15,13 +15,13 @@ Usage:
 */
 
 -- =============================================================================
--- Create Dimension: gold.dim_product
+-- Create Dimension: gold.dim_products
 -- =============================================================================
 IF OBJECT_ID ('gold.dim_products', 'V') IS NOT NULL
-	DROP VIEW gold.dim_product
+	DROP VIEW gold.dim_products
 GO
 
-CREATE VIEW gold.dim_product AS
+CREATE VIEW gold.dim_products AS
 SELECT 
 	   ROW_NUMBER() OVER(ORDER BY pri.[prd_start_dt], pri.[prd_key]) AS product_key
       ,pri.[prd_id] AS product_id
@@ -40,13 +40,13 @@ SELECT
   WHERE pri.prd_end_dt IS NULL
   GO
 -- =============================================================================
--- Create Dimension: gold.dim_customer
+-- Create Dimension: gold.dim_customers
 -- =============================================================================
 IF OBJECT_ID ('gold.dim_customers', 'V') IS NOT NULL
-	DROP VIEW gold.dim_customer
+	DROP VIEW gold.dim_customers
 GO
 
-CREATE VIEW gold.dim_customer AS
+CREATE VIEW gold.dim_customers AS
 SELECT 
 	  ROW_NUMBER() OVER(ORDER BY ci.[cst_key]) AS customer_key
 	  ,ci.[cst_id] AS customer_id
@@ -82,8 +82,8 @@ SELECT [sls_ord_num] AS order_number
       ,[sls_quantity] AS quantity
       ,[sls_price] AS price
   FROM [SQLserverDWH].[silver].[cmt_sales_details] sd
-  LEFT JOIN [gold].[dim_product] dp
+  LEFT JOIN [gold].[dim_products] dp
   ON sd.sls_prd_key = dp.product_number
-  LEFT JOIN [gold].[dim_customer] dc
+  LEFT JOIN [gold].[dim_customers] dc
   ON sd.sls_cust_id = dc.customer_id;
   GO
