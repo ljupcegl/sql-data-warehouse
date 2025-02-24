@@ -17,7 +17,7 @@ Usage:
 -- =============================================================================
 -- Create Dimension: gold.dim_product
 -- =============================================================================
-IF OBJECT_ID ('gold.dim_product', 'V') IS NOT NULL
+IF OBJECT_ID ('gold.dim_products', 'V') IS NOT NULL
 	DROP VIEW gold.dim_product
 GO
 
@@ -42,7 +42,7 @@ SELECT
 -- =============================================================================
 -- Create Dimension: gold.dim_customer
 -- =============================================================================
-IF OBJECT_ID ('gold.dim_customer', 'V') IS NOT NULL
+IF OBJECT_ID ('gold.dim_customers', 'V') IS NOT NULL
 	DROP VIEW gold.dim_customer
 GO
 
